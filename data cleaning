@@ -1,0 +1,22 @@
+import json
+# def load_data(newdata):
+#     with open(newdata,"r") as file:
+#         data = json.load(file)
+#         return data
+def clean_data(data):
+    #remove users with missing name!
+    data["users"]=[user for user in data["users"] if user["name"].strip()]
+    data["users"]=[user for user in data["users"] if user["friends"] or user["liked_pages"]]
+    for user in data["users"]:
+         user["friends"] = list(set(user["friends"]))
+    remove_dupli={}
+    for user in data[
+    
+    return data
+
+# data=load_data("GrData2.json")
+# another way to do this 
+data = json.load(open("GrData2.json"))
+data =clean_data(data)
+json.dump(data,open("cleaned_data.json","w"),indent=4)
+print("your data has been successfully done!!!")
